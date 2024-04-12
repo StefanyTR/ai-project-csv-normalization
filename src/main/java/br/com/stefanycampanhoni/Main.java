@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -59,35 +57,10 @@ public class Main {
         if (input == null)
             return "";
 
-        // If eu want to replace another special simbol, just add a another element in
-        // the map, using .put({key}, {value}) method
-        Map<String, String> replacements = new HashMap<>();
-        replacements.put("&ccedil;", "ç");
-        replacements.put("&Ccedil;", "Ç");
-        replacements.put("&uacute;", "ú");
-        replacements.put("&Uacute;", "Ú");
-        replacements.put("&aacute;", "á");
-        replacements.put("&Aacute;", "Á");
-        replacements.put("&eacute;", "é");
-        replacements.put("&Eacute;", "É");
-        replacements.put("&Iacute;", "Í");
-        replacements.put("&iacute;", "í");
-        replacements.put("&oacute;", "ó");
-        replacements.put("&Oacute;", "Ó");
-        replacements.put("&ecirc;", "ê");
-        replacements.put("&Ecirc;", "Ê");
-        replacements.put("&atilde;", "ã");
-        replacements.put("&Atilde;", "Ã");
-
-        // For each element in the map, it will be replaced with the appropriate symbol.
-        for (Map.Entry<String, String> htmlSpecialSimbols : replacements.entrySet()) {
-            input.replaceAll(htmlSpecialSimbols.getKey(), htmlSpecialSimbols.getValue());
-        }
-
         return input.replaceAll("<br/>", " ")
                 .replaceAll("\n", " ")
                 .replaceAll("  ", " ")
-                .replaceAll(";dada", "");
+                .replaceAll(";dada", "")
 
                 // All this replaces will be change to regex
                 .replaceAll("&ccedil;", "ç")
