@@ -9,11 +9,11 @@ import java.io.PrintWriter;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        String inputFilePath = "teste.csv";
-        String outputFilePath = "new-teste.csv";
+        String inputFilePath = "test.csv";
+        String outputFilePath = "new-test.csv";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
-                PrintWriter writer = new PrintWriter(outputFilePath, "UTF-8")) {
+                PrintWriter writer = new PrintWriter(outputFilePath, "utf-8")) {
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -28,7 +28,7 @@ public class Main {
     }
 
     private static String getTextFromHTML(String html) {
-        return (html == null || html.isEmpty() ? html : html.replaceAll("\\<.*?>", "").trim().replaceAll(" +", " "));
+        return (html == null || html.isEmpty() ? html : html.replaceAll("\\<.*?>", "").replaceAll(" +", " "));
     }
 
     private static String sanitize(String text) {
@@ -36,21 +36,15 @@ public class Main {
             return "";
 
         return getTextFromHTML(
-                text.replaceAll("\r", "")
-                        .replaceAll("\t", "")
-                        .replaceAll("_x000D_", ""))
+                text.replaceAll("_x000D_", ""))
                 .replaceAll("#", "*")
-                .replaceAll("\\n", " ")
-                .replaceAll("\n", " ")
                 .replaceAll("\"", "'")
                 .replaceAll("--", "-")
                 .replaceAll("__", "_")
                 .replaceAll("&[a-z]+;", " ")
                 .replaceAll("//s+", " ")
                 .replaceAll("  ", " ")
-                .replaceAll("0000", "")
-                .replaceAll("\\\\x[0-9A-F]+", "")
-                .trim();
+                .replaceAll("\\\\x[0-9A-F]+", "");
     }
 
     private static String removeHTML(String input) {
@@ -67,7 +61,8 @@ public class Main {
                 .replaceAll("\n", " ")
                 .replaceAll("  ", " ")
 
-                // All this replaces will be change to regex
+                // This group of replaceAll statements will be replaced
+                // with a faster cleaner solution.
                 .replaceAll("&ccedil;", "ç")
                 .replaceAll("&Ccedil;", "Ç")
                 .replaceAll("&uacute;", "ú")
@@ -86,6 +81,6 @@ public class Main {
                 .replaceAll("&Atilde;", "Ã")
                 .replaceAll("&otilde;", "õ")
                 .replaceAll("&Otilde;", "Õ")
-                .trim();
+                .replaceAll(";dada", "");
     }
 }
